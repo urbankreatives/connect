@@ -537,12 +537,12 @@
 								<!--begin::Page title-->
 								<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
 									<!--begin::Title-->
-									<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Product Categories
+									<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Add User
 									<!--begin::Separator-->
 									<span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
 									<!--end::Separator-->
 									<!--begin::Description-->
-									<small class="text-muted fs-7 fw-bold my-1 ms-1"></small>
+									<small class="text-muted fs-7 fw-bold my-1 ms-1">#XRS-45670</small>
 									<!--end::Description--></h1>
 									<!--end::Title-->
 								</div>
@@ -555,7 +555,7 @@
 									<!--begin::Secondary button-->
 									<!--end::Secondary button-->
 									<!--begin::Primary button-->
-									<a href="/categories" class="btn btn-sm btn-primary"  data-bs-target="#kt_modal_create_app">View Categories</a>
+									<a href="#" class="btn btn-sm btn-primary"  data-bs-target="#kt_modal_create_app"></a>
 									<!--end::Primary button-->
 								</div>
 								<!--end::Actions-->
@@ -585,7 +585,7 @@
 													<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
 													
 													<!--end::Svg Icon-->
-													<h2>Add Category</h2>
+													<h2>{{title}}</h2>
 												</div>
 												<!--end::Card title-->
 											</div>
@@ -613,15 +613,11 @@
             <strong>{{message.intro}}</strong>{{message.message}}
         </div>
         {{/if}}
-												<form id="kt_ecommerce_settings_general_form" class="form" method="post" action="/addCategory" autocomplete="off">
+												<form id="kt_ecommerce_settings_general_form" class="form" method="post" action="/user"  autocomplete="off">
 													<!--begin::Input group-->
-													<div class="mb-7">
-														<!--begin::Label-->
-													
-														<!--end::Label-->
-														<!--begin::Image input wrapper-->
-														
+												
 													<!--end::Input group-->
+												
 																<!--begin::Row-->
 													<div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
 														<!--begin::Col-->
@@ -630,31 +626,127 @@
 															<div class="fv-row mb-7">
 																<!--begin::Label-->
 																<label class="fs-6 fw-bold form-label mt-3">
-																	<span class="required">Name Of Category</span>
+																	<span class="required"> Name</span>
 																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" ></i>
 																</label>
 																<!--end::Label-->
 																<!--begin::Input-->
-																<input type="text" class="form-control" name="name" id="name"  value=""  >
+																<input type="text" class="form-control form-control-solid" name="name" id="name" value=""   />
 																<!--end::Input-->
 															</div>
 															<!--end::Input group-->
 														</div>
 														<!--end::Col-->
 														<!--begin::Col-->
-														
+														<div class="col">
+															<!--begin::Input group-->
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold form-label mt-3">
+																	<span>Surname</span>
+																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" ></i>
+																</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="surname" id="surname" value=""   />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+														</div>
 														<!--end::Col-->
 													</div>
 													<!--end::Row-->
 													<!--begin::Row-->
-												
+													<div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+														<!--begin::Col-->
+														<div class="col">
+															<!--begin::Input group-->
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold form-label mt-3">
+																	<span class="required">Role</span>
+																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""></i>
+																</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="role" id="role" value=""   />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+														</div>
+														<!--end::Col-->
+														<!--begin::Col-->
+														<div class="col">
+															<!--begin::Input group-->
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold form-label mt-3">
+																	<span>UID</span>
+																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title=""></i>
+																</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="text" class="form-control form-control-solid" name="uid" value=""   />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+														</div>
+														<!--end::Col-->
+													</div>
 													<!--end::Row-->
 													<!--begin::Row-->
-												
+																<!--end::Row-->
+																<div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
+														<!--begin::Col-->
+														<div class="col">
+															<!--begin::Input group-->
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold form-label mt-3">
+																	<span class="required">Password</span>
+																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip"></i>
+																</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="password" class="form-control form-control-solid" name="password" id="password" value=""  {{readonly}} />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+														</div>
+														<!--end::Col-->
+														<!--begin::Col-->
+														<div class="col">
+															<!--begin::Input group-->
+															<div class="fv-row mb-7">
+																<!--begin::Label-->
+																<label class="fs-6 fw-bold form-label mt-3">
+																	<span>Confirm Password</span>
+																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" ></i>
+																</label>
+																<!--end::Label-->
+																<!--begin::Input-->
+																<input type="password" class="form-control form-control-solid" name="confirmPassword" id="confirmPassword" value=""  {{readonly}} />
+																<!--end::Input-->
+															</div>
+															<!--end::Input group-->
+														</div>
+														<!--end::Col-->
+													</div>
 													<!--end::Row-->
+													<!--begin::Input group-->
+												
                                          
 
-   											<!--begin::Input group-->
+   								<!--begin::Row-->
+													
+													<!--end::Row-->
+
+
+  
+                                                    								<!--begin::Row-->
+												
+													<!--end::Row-->
+													<!--begin::Input group-->
 												
 													<!--end::Input group-->
 													<!--begin::Separator-->
@@ -663,10 +755,11 @@
 													<!--begin::Action buttons-->
 													<div class="d-flex justify-content-end">
 														<!--begin::Button-->
-														<button type="reset" data-kt-contacts-type="cancel" class="btn btn-light me-3">Cancel</button>
+														
+														<!--<button type="reset" data-kt-contacts-type="cancel" class="btn btn-light me-3">Cancel</button>
 														<!--end::Button-->
 														<!--begin::Button-->
-														<button type="submit" class="btn btn-primary">
+														<button id="submit" type="submit" class="btn btn-primary">
 															<span class="indicator-label">Save</span>
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -695,10 +788,6 @@
 
 
 
-          
-
-
-
                                 	<!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(used by all pages)-->
@@ -716,5 +805,7 @@
 		<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 		<script src="assets/js/custom/utilities/modals/create-app.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
+
 
 

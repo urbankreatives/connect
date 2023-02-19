@@ -18,7 +18,7 @@ const multer = require('multer');
 var xlsx = require('xlsx')
 
 var routes = require('./routes/index');
-var userRoutes = require('./routes/user');
+//var userRoutes = require('./routes/user');
 
 
 var app = express();
@@ -58,7 +58,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/user', userRoutes);
+//app.use('/user', userRoutes);
 
 app.use('/', routes)
 
