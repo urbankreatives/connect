@@ -107,7 +107,8 @@ router.get('/orderVI',isLoggedIn, function(req,res){
     
   
      cart2.push(docs[i].cart)
-    
+    let name = docs[i].buyerName
+    let mobile = docs[i].buyerMobile
      if(i == size){
       console.log(cart2.length, 'cart length')
      for(var x=0;x<cart2.length;x++){
@@ -191,8 +192,8 @@ router.get('/orderVI',isLoggedIn, function(req,res){
     ord.type = ord6[q].item.type
     ord.id = ord6[q].item._id
     ord.price = ord6[q].price
-    ord.buyerName=ord6[q].buyerName
-    ord.buyerMobile = ord6[q].buyerMobile
+    ord.buyerName=name
+    ord.buyerMobile = mobile
     ord.status = ord6[q].status
     ord.date = ord6[q].date
     ord.price2 = ord6[q].price2
