@@ -63,7 +63,7 @@ app.use(function(req, res, next) {
 app.use('/', routes)
 
 
-const port = process.env.PORT || 5500;
+const port = process.env.PORT || 7500;
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);

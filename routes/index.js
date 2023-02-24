@@ -18,6 +18,7 @@ var multer = require('multer')
 const fs = require('fs')
 var path = require('path');
 var passport = require('passport');
+var bcrypt = require('bcrypt-nodejs');
 var moment = require('moment')
 /*const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;*/
@@ -190,6 +191,10 @@ router.get('/orderVI',isLoggedIn, function(req,res){
     ord.type = ord6[q].item.type
     ord.id = ord6[q].item._id
     ord.price = ord6[q].price
+    ord.buyerName=ord6[q].buyerName
+    ord.buyerMobile = ord6[q].buyerMobile
+    ord.status = ord6[q].status
+    ord.date = ord6[q].date
     ord.price2 = ord6[q].price2
     ord.qty = ord6[q].qty
     ord.make = ord6[q].item.make
@@ -1404,6 +1409,36 @@ router.get('/addCategory',isLoggedIn,function(req,res){
       });
       });
       
+      router.get('/clients',isLoggedIn,(req,res)=>{
+        User.find({role:'client'},function(err,docs){
+          if (!err) {
+            res.render("clientList", {
+               list:docs,
+              
+            });
+        }
+        })
+      })
+      
+   router.get('/orderX/:id',isLoggedIn,  (req, res) => {
+
+    var id = req.params.id
+    var pro = req.user
+
+  
+     Order.findByIdAndUpdate(id,{$set:{status:'delivered'}},(err, docs) => {
+         if (!err) {
+             res.render("orderReport", {
+                list:docs,pro:pro
+               
+             });
+         }
+     });
+    
+   });
+
+
+
 
 
     router.get('/report', isLoggedIn, function (req, res, next) {
@@ -1445,6 +1480,310 @@ router.get('/addCategory',isLoggedIn,function(req,res){
           }
       });
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+  
+router.get('/forgot', function (req, res, next) {
+  var messages = req.flash('error');
+  res.render('forgot', { messages: messages, hasErrors: messages.length > 0});
+});
+
+router.post('/forgot',function(req,res){
+  const { email } = req.body;
+
+  let errors = [];
+
+  //------------ Checking required fields ------------//
+  if (!email) {
+      errors.push({ msg: 'Please enter an email Address' });
+  }
+
+  if (errors.length > 0) {
+      res.render('forgot', {
+          errors,
+          email
+      });
+  } else {
+      User.findOne({ email: email }).then(user => {
+          if (!user) {
+              //------------ User already exists ------------//
+              errors.push({ msg: 'User with Email Address does not exist!' });
+              res.render('forgot', {
+                  errors,
+                  email
+              });
+          } else {
+
+              const oauth2Client = new OAuth2(
+                  "173872994719-pvsnau5mbj47h0c6ea6ojrl7gjqq1908.apps.googleusercontent.com", // ClientID
+                  "OKXIYR14wBB_zumf30EC__iJ", // Client Secret
+                  "https://developers.google.com/oauthplayground" // Redirect URL
+              );
+
+              oauth2Client.setCredentials({
+                  refresh_token: "1//04T_nqlj9UVrVCgYIARAAGAQSNwF-L9IrGm-NOdEKBOakzMn1cbbCHgg2ivkad3Q_hMyBkSQen0b5ABfR8kPR18aOoqhRrSlPm9w"
+              });
+              const accessToken = oauth2Client.getAccessToken()
+
+              const token = jwt.sign({ _id: user._id }, JWT_RESET_KEY, { expiresIn: '30m' });
+              const CLIENT_URL = 'http://' + req.headers.host;
+              const output = `
+              <h2>Please click on below link to reset your account password</h2>
+              
+              <a href="${CLIENT_URL}/forgot/${token}">click here</a>
+              <p><b>NOTE: </b> The activation link expires in 30 minutes.</p>
+              `;
+
+              User.updateOne({ resetLink: token }, (err, success) => {
+                  if (err) {
+                      errors.push({ msg: 'Error resetting password!' });
+                      res.render('forgot', {
+                          errors,
+                          email
+                      });
+                  }
+                  else {
+                      const transporter = nodemailer.createTransport({
+                         
+                          service: 'gmail',
+                          auth: {
+                              user: "cashreq00@gmail.com",
+                              pass: "itzgkkqtmchvciik",
+                          },
+                      });
+
+                      // send mail with defined transport object
+                      const mailOptions = {
+                          from: '"Auth Admin" <cashreq00@gmail.com>', // sender address
+                          to: email, // list of receivers
+                          subject: "Account Password Reset: Part Connection ✔", // Subject line
+                          html: output, // html body
+                      };
+
+                      transporter.sendMail(mailOptions, (error, info) => {
+                          if (error) {
+                              console.log(error);
+                              req.flash(
+                                  'error_msg',
+                                  'Something went wrong on our end. Please try again later.'
+                              );
+                              res.redirect('/forgot');
+                          }
+                          else {
+                              console.log('Mail sent : %s', info.response);
+                              req.flash(
+                                  'success_msg',
+                                  'Password reset link sent to email address. Please follow the instructions.'
+                              );
+                              res.redirect('/');
+                          }
+                      })
+                  }
+              })
+
+          }
+      });
+  }
+})
+
+
+
+//------------ Reset Password Route ------------//
+router.get('/reset/:id', (req, res) => {
+  // console.log(id)
+  res.render('users/reset', { id: req.params.id })
+});
+
+router.post('/reset/:id',(req,res)=>{
+  var { password, confirmPassword } = req.body;
+    const id = req.body.id
+    console.log('id',id)
+    let errors = [];
+
+    //------------ Checking required fields ------------//
+    if (!password || !confirmPassword) {
+        req.flash(
+            'error_msg',
+            'Please enter all fields.'
+        );
+        res.redirect(`/reset/${id}`);
+    }
+
+    //------------ Checking password length ------------//
+    else if (password.length < 8) {
+        req.flash(
+            'error_msg',
+            'Password must be at least 8 characters.'
+        );
+        res.redirect(`/reset/${id}`);
+    }
+
+    //------------ Checking password mismatch ------------//
+    else if (password != confirmPassword) {
+        req.flash(
+            'error_msg',
+            'Passwords do not match.'
+        );
+        res.redirect(`/reset/${id}`);
+    }
+
+    else {
+       var user = User();
+       password=req.body.password=encryptPassword(req.body.password)
+
+console.log(password)
+       User.findByIdAndUpdate(id,{$set:{password:password}},function(err,toc){
+
+       })
+
+       res.redirect('/');
+             
+            
+    }
+});
+
+
+router.get('/forgot/:token', (req,res)=>{
+  const { token } = req.params;
+
+  if (token) {
+      jwt.verify(token, JWT_RESET_KEY, (err, decodedToken) => {
+          if (err) {
+              req.flash(
+                  'error_msg',
+                  'Incorrect or expired link! Please try again.'
+              );
+              res.redirect('/');
+          }
+          else {
+              const { _id } = decodedToken;
+              User.findById(_id, (err, user) => {
+                  if (err) {
+                      req.flash(
+                          'error_msg',
+                          'User with email ID does not exist! Please try again.'
+                      );
+                      res.redirect('/');
+                  }
+                  else {
+                      res.redirect(`/reset/${_id}`)
+                  }
+              })
+          }
+      })
+  }
+  else {
+      console.log("Password reset error!")
+  }
+
+});
+
+
+
+
+
+
+
+
+
+// change password
+  
+// change password
+router.get('/pass2',isLoggedIn, (req, res) => {
+  var pro = req.user
+   User.findById(req.user._id, (err, doc) => {
+       if (!err) {
+           res.render("change", {
+              
+               user: doc,pro:pro
+             
+           });
+       }
+   });
+ });
+ 
+ 
+
+ 
+ router.post('/pass2',isLoggedIn, function(req,res){
+   var user = new User();
+   var pro = req.user
+   req.check('password','Enter New Password').notEmpty();
+ 
+   req.check('confirmPassword', 'Confirm Password').notEmpty();
+ 
+ 
+ req.check('password', 'Password do not match').isLength({min: 4}).equals(req.body.confirmPassword);
+ var errors = req.validationErrors();
+ 
+ 
+ 
+ 
+  if (errors) {
+ 
+  
+ 
+     req.session.errors = errors;
+     req.session.success = false;
+     res.render('change',{  errors:req.session.errors, pro:pro 
+    })
+ 
+   
+   
+ 
+ 
+ }
+ else if (req.body.password === req.body.confirmPassword && !req.validationErrors()){
+   user.password=req.body.password=encryptPassword(req.body.password)
+ 
+ 
+ 
+ 
+ 
+ User.findOneAndUpdate({_id:req.body._id},req.body,
+  { new: true }, (err, doc) => {
+     if (!err) {
+     
+       req.session.message = {
+         type:'success',
+         message:'Password Change Successful'
+       }  
+       res.render('change',{message:req.session.message, user:req.user, pro:pro
+        }); }
+     else {
+       console.log('error'+err)
+ 
+     }
+   
+ })
+ }
+ 
+ 
+ 
+ })
+ 
+ 
+ 
+     
+ function encryptPassword(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);  
+  };
+             
+     
+     
 
 
   module.exports = router;

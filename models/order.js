@@ -5,8 +5,9 @@ var schema = new Schema({
    
     cart: {type: Object, required: true},
     email: {type: String, required: true},
-
-    date: {type: String, required: true},
+    userId: {type: String, required: true},
+  
+    amount: {type: Number, required: true},
     pollUrl: {type: String, required: true}
 });
 

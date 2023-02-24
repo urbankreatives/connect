@@ -13,17 +13,17 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="en">
 	<!--begin::Head-->
 	<head><base href="">
-		<title>Perfect Pair</title>
+	<title>SchoolZoid</title>
 		<meta charset="utf-8" />
-		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
-		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="description" content="SchoolZoid is an online school management system that saves you time and makes your school look professional ." />
+		<meta name="keywords" content="SchoolZoid is world's first fully online school management system with scheduler, parent portal, attendance, homework, grades, report card and more." />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+		<meta property="og:title" content="This school management software is for learning, administration, and management activities in schools, colleges, universities." />
+		<meta property="og:url" content="https://schoolzoid.co.zw" />
+		<meta property="og:site_name" content="SchoolZoid | Arioc Digital Agency" />
+		<link rel="canonical" href="https://schoolzoid.co.zw" />
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -33,6 +33,33 @@ License: For each use you must have a valid license purchased only from above li
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 	</head>
+
+		 <style>
+    
+.errors {
+    background: #e79892;
+    padding: 5px;
+    margin-bottom: 10px;
+    min-width: 200px;
+    display: inline-block;
+    border: 1px solid #e74c3c;
+  }
+  
+  .errors ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .success {
+    background: #80cca0;
+    padding: 5px;
+    margin-bottom: 10px;
+    min-width: 200px;
+    display: inline-block;
+    border: 1px solid black;
+  }
+</style>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" class="bg-body">
@@ -51,7 +78,7 @@ License: For each use you must have a valid license purchased only from above li
 						</a>
 						<!--end::Logo-->
 						<!--begin::Title-->
-						<h1 class="text-dark fs-2x mb-3">Welcome!</h1>
+						<h1 class="text-dark fs-2x mb-3">Forgot Password!</h1>
 						<!--end::Title-->
 						<!--begin::Description-->
 				
@@ -69,7 +96,7 @@ License: For each use you must have a valid license purchased only from above li
 					<div class="d-flex flex-center p-15 shadow-sm bg-body rounded w-100 w-md-550px mx-auto ms-xl-20">
 						<!--begin::Form-->
 		
-						<form  action="/" method="post" class="form" novalidate="novalidate" >
+						<form  action="/forgot" method="post" class="form" novalidate="novalidate" >
 							<!--begin::Heading-->
 										{{#if hasErrors}}
             <div class="alert alert-danger">
@@ -101,40 +128,12 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Heading-->
 							<!--begin::Input group-->
 							<div class="fv-row mb-10">
-								<label class="form-label fw-bolder text-dark fs-6">Username</label>
+								<label class="form-label fw-bolder text-dark fs-6">Enter registered email</label>
 								<input class="form-control form-control-solid" type="text" placeholder="" name="email" id="email" autocomplete="off" />
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->
-							<div class="mb-7 fv-row" data-kt-password-meter="true">
-								<!--begin::Wrapper-->
-								<div class="mb-1">
-									<!--begin::Label-->
-									<label class="form-label fw-bolder text-dark fs-6"> Password</label>
-									<!--end::Label-->
-									<!--begin::Input wrapper-->
-									<div class="position-relative mb-3">
-										<input class="form-control form-control-solid" type="password" placeholder="" name="password"  id="password"  autocomplete="off" />
-										<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
-											<i class="bi bi-eye-slash fs-2"></i>
-											<i class="bi bi-eye fs-2 d-none"></i>
-										</span>
-									</div>
-									<!--end::Input wrapper-->
-									<!--begin::Meter-->
-									<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
-									</div>
-									<!--end::Meter-->
-								</div>
-								<!--end::Wrapper-->
-								<!--begin::Hint-->
-								<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
-								<!--end::Hint-->
-							</div>
+						
 							<!--end::Input group=-->
 							<!--begin::Row
 							<div class="fv-row mb-10">
@@ -152,19 +151,16 @@ License: For each use you must have a valid license purchased only from above li
 							</div>-->
 							<!--end::Row-->
 							<!--begin::Row-->
-							 <div class="form-group d-flex align-items-center justify-content-between">
-                      
-                        <a href="/forgot" class="forgot-btn">Forgot Password?</a>
-                  
-                    </div>
+							     <a href="/" class="forgot-btn">Remember your password?</a>
 							<div class="text-center pb-lg-0 pb-8">
 								<button type="submit"  class="btn btn-lg btn-primary fw-bolder">
-									<span class="indicator-label">Login</span>
+									<span class="indicator-label">Get Reset Link </span>
 							
 								</button>
 							</div>
 							<!--end::Row-->
 								{{/if}}
+								   
 						</form>
 					
 						<!--end::Form-->

@@ -588,7 +588,7 @@
 								<!--begin::Page title-->
 								<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
 									<!--begin::Title-->
-									<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
+									<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Authentication
 									<!--begin::Separator-->
 									<span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
 									<!--end::Separator-->
@@ -606,7 +606,7 @@
 									<!--begin::Secondary button-->
 									<!--end::Secondary button-->
 									<!--begin::Primary button-->
-								
+									
 									<!--end::Primary button-->
 								</div>
 								<!--end::Actions-->
@@ -636,7 +636,7 @@
 													<!--begin::Svg Icon | path: icons/duotune/communication/com005.svg-->
 													
 													<!--end::Svg Icon-->
-													<h2>Upload Products Excel File</h2>
+													<h2>Change Password</h2>
 												</div>
 												<!--end::Card title-->
 											</div>
@@ -664,9 +664,19 @@
             <strong>{{message.intro}}</strong>{{message.message}}
         </div>
         {{/if}}
-												<form id="kt_ecommerce_settings_general_form" class="form" method="post" action="/addProducts"  enctype="multipart/form-data"  accept=".xlsx">
+												<form id="kt_ecommerce_settings_general_form" class="form" method="post" action="/pass2">
 													<!--begin::Input group-->
-													<div class="mb-7">
+											
+														<!--begin::Label-->
+													
+ <input type="hidden" name="_id" value="{{user._id}}">
+														<!--end::Label-->
+														<!--begin::Image input wrapper-->
+														
+													<!--end::Input group-->
+																<!--begin::Row-->
+													<!--begin::Input group-->
+														<div class="mb-7">
 														<!--begin::Label-->
 													
 														<!--end::Label-->
@@ -677,28 +687,68 @@
 													<div class="row row-cols-1 row-cols-sm-2 rol-cols-md-1 row-cols-lg-2">
 														<!--begin::Col-->
 														<div class="col">
-															<!--begin::Input group-->
-															<div class="fv-row mb-7">
-																<!--begin::Label-->
-																<label class="fs-6 fw-bold form-label mt-3">
-																
-																	<i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" ></i>
-																</label>
-																<!--end::Label-->
-																<!--begin::Input-->
-																<input type="file" class="form-control form-control-solid" name="file" id="file" value=""   />
-																<!--end::Input-->
-															</div>
-															<!--end::Input group-->
-														</div>
-														<!--end::Col-->
-														<!--begin::Col-->
-													
-														<!--end::Col-->
-													</div>
-													<!--end::Row-->
+							<div class="mb-7 fv-row" data-kt-password-meter="true">
+								<!--begin::Wrapper-->
+								<div class="mb-1">
+									<!--begin::Label-->
+									<label class="form-label fw-bolder text-dark fs-6">New Password</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="position-relative mb-3">
+										<input class="form-control form-control-solid" type="password" placeholder="" name="password"  id="password"  autocomplete="off" />
+										<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+											<i class="bi bi-eye-slash fs-2"></i>
+											<i class="bi bi-eye fs-2 d-none"></i>
+										</span>
+									</div>
+									<!--end::Input wrapper-->
+									<!--begin::Meter-->
+									<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+									</div>
+									<!--end::Meter-->
+								</div>
+								<!--end::Wrapper-->
+								<!--begin::Hint-->
+								<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+								<!--end::Hint-->
+							</div>
 													<!--begin::Row-->
-													
+													<!--begin::Input group-->
+							<div class="mb-7 fv-row" data-kt-password-meter="true">
+								<!--begin::Wrapper-->
+								<div class="mb-1">
+									<!--begin::Label-->
+									<label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+									<!--end::Label-->
+									<!--begin::Input wrapper-->
+									<div class="position-relative mb-3">
+										<input class="form-control form-control-solid" type="password" placeholder="" name="confirmPassword"  id="confirmPassword"  autocomplete="off" />
+										<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+											<i class="bi bi-eye-slash fs-2"></i>
+											<i class="bi bi-eye fs-2 d-none"></i>
+										</span>
+									</div>
+									<!--end::Input wrapper-->
+									<!--begin::Meter-->
+									<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+										<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+									</div>
+									<!--end::Meter-->
+								</div>
+								<!--end::Wrapper-->
+								<!--begin::Hint-->
+								<div class="text-muted">Use 8 or more characters with a mix of letters, numbers &amp; symbols.</div>
+								<!--end::Hint-->
+							</div>
+													<!--end::Row-->
+												
 													<!--end::Row-->
                                          
 
