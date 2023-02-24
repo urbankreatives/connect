@@ -107,8 +107,10 @@ router.get('/orderVI',isLoggedIn, function(req,res){
     
   
      cart2.push(docs[i].cart)
+    
     let name = docs[i].buyerName
     let mobile = docs[i].buyerMobile
+    console.log(name,mobile ,'here')
      if(i == size){
       console.log(cart2.length, 'cart length')
      for(var x=0;x<cart2.length;x++){
